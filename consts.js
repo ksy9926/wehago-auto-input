@@ -1,4 +1,6 @@
 export const path = {
+  select:
+    '//*[@id="BODY_CLASS"]/div[3]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[1]/div[1]/div[3]/div[3]/div[1]/div[2]/div[2]/div[3]/table/tbody/tr[1]/td/div/div/div/div[1]/div[1]/div/span',
   contentInput:
     '//*[@id="BODY_CLASS"]/div[3]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[1]/div[1]/div[3]/div[3]/div[1]/div[2]/div[2]/div[2]/table/tbody/tr[1]/td/div/div/div/div/input',
   purposeInput:
@@ -9,4 +11,8 @@ export const path = {
     '//*[@id="BODY_CLASS"]/div[3]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[1]/div[1]/div[3]/div[3]/div[1]/div[2]/div[2]/div[3]/table/tbody/tr[2]/td/div/div/div/div/input',
   paymentButton:
     '//*[@id="BODY_CLASS"]/div[3]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[1]/div[2]/div/button[2]',
+};
+
+export const id = {
+  scroll: "scrollElement",
 };

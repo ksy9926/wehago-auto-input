@@ -1,6 +1,15 @@
 import pkg from "selenium-webdriver";
+import moment from "moment";
 import readline from "readline";
-import { path } from "./consts.js";
+import { path, id } from "./consts.js";
+
+const sleep = (ms) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
+};
 
 // 셀레니엄 설정
 let name = "";
@@ -47,21 +56,41 @@ async function test() {
 
     const purposeInput = await driver.findElement(By.xpath(path.purposeInput));
     const dateDiv = await driver.findElement(By.xpath(path.dateDiv));
+    const select = await driver.findElement(By.xpath(path.select));
     const peopleInput = await driver.findElement(By.xpath(path.peopleInput));
     const paymentButton = await driver.findElement(
       By.xpath(path.paymentButton)
     );
+
     const date = await dateDiv.getText();
+    const whenBuy = moment(date);
+    const isDinner = whenBuy.hour() > 16;
+
+    const mealType = isDinner ? "석식" : "중식";
+    const purpose = isDinner ? "저녁식대" : "점심식대";
+
+    if (isDinner) {
+      await select.click();
+      await sleep(1000);
+
+      const scroll = await driver.findElement(By.id(id.scroll));
+
+      const listItem = await scroll.findElement(
+        By.xpath(`//div[contains(text(), '${mealType}')]`)
+      );
+      await listItem.click();
+    }
 
     await contentInput.sendKeys(
-      `${changeDateFormat(date)}일 중식 1명(${name})`
+      `${changeDateFormat(date)}일 ${mealType} 1명(${name})`
     );
-    await purposeInput.sendKeys(`점심식대`);
+    await purposeInput.sendKeys(purpose);
     await peopleInput.sendKeys(`1명(${name})`);
+
     await paymentButton.click();
 
     console.log(
-      `${changeDateFormat(date)}일 중식 1명(${name}) 입력되었습니다.`
+      `${changeDateFormat(date)}일 ${mealType} 1명(${name}) 입력되었습니다.`
     );
 
     let confirmButton;

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/davecdri/wehago-auto-input#readme",
   "dependencies": {
+    "moment": "^2.29.4",
     "selenium-webdriver": "^4.3.1"
   }
 }
